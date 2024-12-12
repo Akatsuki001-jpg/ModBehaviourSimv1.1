@@ -6,12 +6,13 @@ import requests
 import websocket
 import pytz
 from datetime import datetime
+from keep_alive import keep_alive
 
 # Set initial status (for now it will be "invisible")
 status = "invisible"
 custom_status= "💡> 14:01 ÷ ☠️Toxicity Level: 0%"
 
-usertoken ="MTMxMjQyMTk5MjQ5ODIwMDYzOA.G1vuCN.STpC_ymgrBvtlAHjl33sxDO0ZXn0WQbqLpIyWk"
+usertoken = os.getenv("token")
 
 if not usertoken:
     print("[ERROR] Please add a token inside Secrets.")
@@ -105,4 +106,5 @@ def run_onliner():
         onliner(usertoken, status)  # Set the status on Discord
         time.sleep(60)  # Check and update every minute
 
+keep_alive()
 run_onliner()
